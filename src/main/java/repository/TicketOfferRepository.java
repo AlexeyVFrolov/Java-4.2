@@ -4,6 +4,7 @@ import domain.TicketOffer;
 import exception.NotFoundException;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class TicketOfferRepository {
     private TicketOffer[] ticketOffers = new TicketOffer[0];
@@ -30,7 +31,7 @@ public class TicketOfferRepository {
         return null;
     }
 
-    public TicketOffer[] findByFromTo(String from, String to) {
+    public TicketOffer[] findByFromTo(String from, String to, Comparator<TicketOffer> comparator) {
         TicketOffer[] tmp = new TicketOffer[ticketOffers.length];
         int index = 0;
 
@@ -43,7 +44,7 @@ public class TicketOfferRepository {
         if (index != 0) {
             TicketOffer[] result = new TicketOffer[index];
             System.arraycopy(tmp, 0, result, 0, index);
-            Arrays.sort(result);
+            Arrays.sort(result, comparator);
             return result;
         }
 

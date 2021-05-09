@@ -19,3 +19,4 @@ public class TicketOffer implements Comparable<TicketOffer>{
         return this.price - tO.price;
     }
 }
+

@@ -1,6 +1,7 @@
 package repository;
 
 import domain.TicketOffer;
+import domain.TicketOfferByPriceComparator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,15 +27,17 @@ class TicketOfferRepositoryTest {
 
     @Test
     public void shouldFindByFromToIfExistsAndSort() {
-        TicketOffer[] expected = new TicketOffer[] {fifthTicketOffer, firstTicketOffer, thirdTicketOffer};
+        TicketOffer[] expected = new TicketOffer[] {thirdTicketOffer, firstTicketOffer, fifthTicketOffer};
+        TicketOfferByPriceComparator ticketOfferByPriceComparator = new TicketOfferByPriceComparator();
 
-        assertArrayEquals(expected, ticketOfferRepository.findByFromTo("DME", "BAX"));
+        assertArrayEquals(expected, ticketOfferRepository.findByFromTo("DME", "BAX", ticketOfferByPriceComparator));
     }
 
     @Test
     public void shouldReturnNullWhenFindByFromToIfNotExists() {
+        TicketOfferByPriceComparator ticketOfferByPriceComparator = new TicketOfferByPriceComparator();
 
-        assertNull(ticketOfferRepository.findByFromTo("VKO", "BAX"));
+        assertNull(ticketOfferRepository.findByFromTo("VKO", "BAX", ticketOfferByPriceComparator));
     }
 
 }
